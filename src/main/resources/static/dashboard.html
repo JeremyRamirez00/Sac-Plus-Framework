@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SAC-Plus - Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+    <h2>Monitoreo - Registro</h2>
+
+    <!-- FORMULARIO -->
+    <form action="/sacplus/guardar" method="post" class="form-container">
+
+        <div class="form-group">
+            <label>Nombre del cliente:</label>
+            <input type="text" id="nombre" name="nombre" required>
+        </div>
+
+        <div class="form-group">
+            <label>Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+        </div>
+
+        <div class="form-group">
+            <label>Equipo:</label>
+            <input type="text" id="equipo" name="equipo" required>
+        </div>
+
+        <div class="form-group">
+            <label>Estado:</label>
+            <select id="estado" name="estado">
+                <option value="">Seleccione</option>
+                <option>Ingresado</option>
+                <option>En revision</option>
+                <option>Diagnosticado</option>
+            </select>
+        </div>
+
+        <div class="form-group full">
+            <label>Observaciones:</label>
+            <textarea id="observaciones" name="observaciones"></textarea>
+        </div>
+
+        <div class="buttons">
+            <button type="button" onclick="registrar()">Registrar</button>
+            <button type="button" onclick="buscar()">Buscar</button>
+            <button type="button" onclick="actualizar()">Actualizar</button>
+            <button type="button" onclick="limpiarTodo()">Limpiar</button>
+        </div>
+
+    </form>
+
+    <!-- TABLA -->
+    <table id="tabla">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Equipo</th>
+            <th>Observaciones</th>
+            <th>Estado</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <button class="btn-finalizar" onclick="finalizar()">Finalizar</button>
+    <button onclick="volver()">Cerrar sesión</button>
+
+</div>
+
+<script src="js/script.js"></script>
+
+<script>
+    window.onload = cargarDatos;
+</script>
+<script>
+    validarSesion();
+    cargarDatos();
+</script>
+
+</body>
+</html>
