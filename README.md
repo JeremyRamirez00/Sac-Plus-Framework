@@ -28,11 +28,13 @@ Sistema web para la gestión de monitoreo de equipos, desarrollado con Spring Bo
 ##  Configuración
 
 1. Crear la base de datos en MySQL
-2. Configurar credenciales en:
+   
+   El proyecto incluye el archivo `database.sql` para la creación de la base de datos.
+3. Configurar credenciales en:
    src/main/resources/application.properties
-3. Ejecutar el proyecto desde:
+4. Ejecutar el proyecto desde:
    SacplusApplication.java
-4. Usuario de prueba:
+5. Usuario de prueba:
 
    -Usuario: admin
 
