@@ -6,20 +6,21 @@ function irDashboard() {
         password: document.getElementById("password").value
     };
 
-    fetch("http://localhost:8080/login", {
+    fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
     })
-    .then(res => res.text())
+    .then(res => res.json()) // ahora JSON
     .then(resp => {
-        if (resp === "OK") {
+
+        if (resp.mensaje) { // validamos éxito
             localStorage.setItem("login", "ok");
             window.location.href = "dashboard.html";
         } else {
-            alert("Usuario o contraseña incorrectos");
+            alert(resp.error || "Usuario o contraseña incorrectos");
         }
     });
 }
@@ -60,7 +61,7 @@ function registrar() {
         estado: estado
     };
 
-    fetch("http://localhost:8080/monitoreo/guardar", {
+    fetch("http://localhost:8080/api/monitoreo", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -76,7 +77,7 @@ function registrar() {
 
 // ================= LISTAR =================
 function cargarDatos() {
-    fetch("http://localhost:8080/monitoreo/listar")
+    fetch("http://localhost:8080/api/monitoreo")
         .then(response => response.json())
         .then(data => {
             let tabla = document.querySelector("#tabla tbody");
@@ -107,7 +108,7 @@ function buscar() {
         return;
     }
     // SI HAY TEXTO → BUSCAR
-    fetch("http://localhost:8080/monitoreo/buscar/" + nombre)
+    fetch("http://localhost:8080/api/monitoreo/buscar?nombre=" + nombre)
         .then(response => response.json())
         .then(data => {
             let tabla = document.querySelector("#tabla tbody");
@@ -142,7 +143,7 @@ function actualizar() {
         observaciones: document.getElementById("observaciones").value,
         estado: document.getElementById("estado").value
     };
-    fetch("http://localhost:8080/monitoreo/actualizar/" + id, {
+    fetch("http://localhost:8080/api/monitoreo/" + id, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -163,7 +164,7 @@ function finalizar() {
         return;
     }
     let id = filaSeleccionada.cells[0].innerText;
-    fetch("http://localhost:8080/monitoreo/finalizar/" + id, {
+    fetch("http://localhost:8080/api/monitoreo/" + id + "/finalizar", {
         method: "PUT"
     })
     .then(() => {
